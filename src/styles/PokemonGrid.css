@@ -1,0 +1,12 @@
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.no-results {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+}

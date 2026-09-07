@@ -1,0 +1,68 @@
+.pokedex-device {
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: #dc0a2d; /* Rojo clásico Pokedex */
+  border-radius: 20px;
+  border: 6px solid #8b0000;
+  padding: 20px;
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.6), inset -5px -5px 15px rgba(0,0,0,0.2);
+}
+
+.pokedex-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  border-bottom: 4px solid #8b0000;
+  padding-bottom: 15px;
+}
+
+.lens-blue {
+  width: 60px;
+  height: 60px;
+  background-color: #28aadc;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 4px #333, inset -5px -5px 10px rgba(0,0,0,0.4);
+  margin-right: 20px;
+}
+
+.lights {
+  display: flex;
+  gap: 10px;
+}
+
+.light {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+.light.red { background-color: #ff0000; }
+.light.yellow { background-color: #ffcc00; }
+.light.green { background-color: #33cc33; }
+
+.pokedex-screen-container {
+  background-color: #dedede;
+  padding: 20px;
+  border-radius: 15px 15px 15px 45px; /* Corte diagonal inferior izquierdo */
+  border: 4px solid #333;
+}
+
+.screen-inner {
+  background-color: #8bac0f; /* Verde clásico Gameboy */
+  border: 6px solid #333;
+  border-radius: 5px;
+  height: 60vh;
+  overflow-y: auto;
+  padding: 15px;
+  box-shadow: inset 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Estilizar la barra de scroll para que se vea retro */
+.screen-inner::-webkit-scrollbar {
+  width: 12px;
+}
+.screen-inner::-webkit-scrollbar-thumb {
+  background-color: #306230;
+  border: 2px solid #8bac0f;
+}

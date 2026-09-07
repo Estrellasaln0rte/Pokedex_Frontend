@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222; /* Fondo oscuro detrás de la pokedex */
+  color: #333;
+  font-family: 'VT323', monospace; /* Fuente retro principal */
+}
