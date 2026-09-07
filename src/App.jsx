@@ -18,15 +18,16 @@ function App() {
   );
 
   return (
-    <div className="pokedex-device">
-      <div className="pokedex-header">
+    <main className="pokedex-device">
+      <header className="pokedex-header">
+        <h1 className="pokedex-titulo">Pokédex</h1>
         <div className="lens-blue"></div>
         <div className="lights">
           <div className="light red"></div>
           <div className="light yellow"></div>
           <div className="light green"></div>
         </div>
-      </div>
+      </header>
       
       <div className="pokedex-screen-container">
         <SearchBar onSearch={setSearchTerm} />
@@ -34,7 +35,7 @@ function App() {
           <PokemonGrid pokemons={filteredPokemons} />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
