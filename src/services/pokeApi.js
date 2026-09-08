@@ -4,7 +4,6 @@ export const getPokemons = async (limit = 151) => {
   return data.results;
 };
 
-// Esta es la función que te falta agregar y exportar:
 export const getPokemonDetails = async (url) => {
   const response = await fetch(url);
   return await response.json();
