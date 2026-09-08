@@ -6,8 +6,24 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: #222; /* Fondo oscuro detrás de la pokedex */
   color: #333;
   font-family: 'VT323', monospace; /* Fuente retro principal */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

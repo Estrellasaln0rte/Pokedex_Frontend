@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { getPokemonesPorTipo, getPokemons } from './services/pokeApi';
+import { getPokemonesPorTipo, getPokemons, getPokemonDetails } from './services/pokeApi';
 import { SearchBar } from './components/SearchBar';
 import { TypeFilter } from './components/TypeFilter';
 import { PokemonGrid } from './components/PokemonGrid';
+import { PokemonDetail } from './components/PokemonDetail';
 import './App.css';
 
 const PAGE_SIZE = 39; // múltiplo de 3 columnas: sin filas incompletas
@@ -14,6 +15,8 @@ function App() {
   const [typeNamesSet, setTypeNamesSet] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const screenRef = useRef(null);
+  const [selectedUrl, setSelectedUrl] = useState(null);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     getPokemons().then(results => setPokemons(results));
@@ -67,6 +70,11 @@ function App() {
     currentPageSafe * PAGE_SIZE
   );
 
+  const isDetailOpen = Boolean(selectedUrl);
+  const selectedIndex = pokemons.findIndex(p => p.url === selectedUrl);
+  const hasPrev = selectedIndex > 0;
+  const hasNext = selectedIndex !== -1 && selectedIndex < pokemons.length - 1;
+
   return (
     <main className="pokedex-device">
       <header className="pokedex-header">
@@ -78,7 +86,17 @@ function App() {
           <div className="light green"></div>
         </div>
       </header>
-      
+      <div className="pokedex-panels">
+        {isDetailOpen ? (
+          <PokemonDetail
+            pokemon={selectedPokemon}
+            onBack={() => setSelectedUrl(null)}
+            onPrev={() => hasPrev && setSelectedUrl(pokemons[selectedIndex - 1].url)}
+            onNext={() => hasNext && setSelectedUrl(pokemons[selectedIndex + 1].url)}
+            hasPrev={hasPrev}
+            hasNext={hasNext}
+          />
+        ) : (
       <div className="pokedex-screen-container">
         <div className="search-row">
           <SearchBar onSearch={handleSearch} />
@@ -112,7 +130,6 @@ function App() {
             >
               ▶
             </button>
-          </div>
         )}
       </div>
     </main>

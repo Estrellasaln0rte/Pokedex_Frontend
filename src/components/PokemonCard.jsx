@@ -12,7 +12,7 @@ export const PokemonCard = ({ nombre }) => {
   if (!pokemon) return <div className="card retro-card loading">...</div>;
 
   return (
-    <div className="card retro-card">
+    <button type="button" className="card retro-card" onClick={() => onSelect(url)}>
       <div className="card-header">
         <span className="pokemon-id">Nº {pokemon.id.toString().padStart(3, '0')}</span>
       </div>
@@ -27,6 +27,6 @@ export const PokemonCard = ({ nombre }) => {
       <div className="card-body">
         <h3 className="pokemon-name">{pokemon.nombre}</h3>
       </div>
-    </div>
+    </button>
   );
 };

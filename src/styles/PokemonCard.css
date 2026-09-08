@@ -8,11 +8,19 @@
   flex-direction: column;
   transition: transform 0.1s ease-in-out;
   cursor: pointer;
+  font: inherit;
+  text-align: inherit;
+  width: 100%;
 }
 
 .retro-card:hover {
   transform: translateY(-4px) scale(1.02);
   background-color: #fff;
+}
+
+.retro-card:focus-visible {
+  outline: 3px solid #2266cc;
+  outline-offset: 2px;
 }
 
 .loading {
