@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { getPokemonDetails } from '../services/pokeApi';
 import '../styles/PokemonCard.css';
 
-export const PokemonCard = ({ url }) => {
+export const PokemonCard = ({ nombre }) => {
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
-    getPokemonDetails(url).then(data => setPokemon(data));
-  }, [url]);
+    getPokemonDetails(nombre).then(data => setPokemon(data));
+  }, [nombre]);
 
   if (!pokemon) return <div className="card retro-card loading">...</div>;
 
@@ -16,16 +16,16 @@ export const PokemonCard = ({ url }) => {
       <div className="card-header">
         <span className="pokemon-id">Nº {pokemon.id.toString().padStart(3, '0')}</span>
       </div>
-      
+
       <div className="image-frame">
-        <img 
-          src={pokemon.sprites.front_default} 
-          alt={pokemon.name} 
+        <img
+          src={pokemon.imagen}
+          alt={pokemon.nombre}
         />
       </div>
-      
+
       <div className="card-body">
-        <h3 className="pokemon-name">{pokemon.name}</h3>
+        <h3 className="pokemon-name">{pokemon.nombre}</h3>
       </div>
     </div>
   );

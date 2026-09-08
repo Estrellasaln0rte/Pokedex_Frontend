@@ -73,3 +73,25 @@
   margin-left: auto;
   order: 1;
 }
+
+.load-more-btn {
+  display: block;
+  margin: 15px auto 5px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.4);
+}
+
+.load-more-btn:hover {
+  background-color: #555;
+}
+
+.load-more-btn:active {
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.4);
+}

@@ -8,8 +8,8 @@ export const PokemonGrid = ({ pokemons }) => {
 
   return (
     <div className="pokemon-grid">
-      {pokemons.map(p => (
-        <PokemonCard key={p.name} url={p.url} />
+      {pokemons.map(nombre => (
+        <PokemonCard key={nombre} nombre={nombre} />
       ))}
     </div>
   );

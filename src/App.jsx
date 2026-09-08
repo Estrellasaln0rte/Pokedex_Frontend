@@ -4,18 +4,27 @@ import { SearchBar } from './components/SearchBar';
 import { PokemonGrid } from './components/PokemonGrid';
 import './App.css';
 
+const PAGE_SIZE = 40;
+
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   useEffect(() => {
-    // Traemos 151 para la primera generación
-    getPokemons(151).then(results => setPokemons(results));
+    getPokemons().then(results => setPokemons(results));
   }, []);
 
-  const filteredPokemons = pokemons.filter(p => 
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const filteredPokemons = pokemons.filter(nombre =>
+    nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const visiblePokemons = filteredPokemons.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPokemons.length;
 
   return (
     <main className="pokedex-device">
@@ -30,9 +39,17 @@ function App() {
       </header>
       
       <div className="pokedex-screen-container">
-        <SearchBar onSearch={setSearchTerm} />
+        <SearchBar onSearch={handleSearch} />
         <div className="screen-inner">
-          <PokemonGrid pokemons={filteredPokemons} />
+          <PokemonGrid pokemons={visiblePokemons} />
+          {hasMore && (
+            <button
+              className="load-more-btn"
+              onClick={() => setVisibleCount(count => count + PAGE_SIZE)}
+            >
+              Cargar más
+            </button>
+          )}
         </div>
       </div>
     </main>
