@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPokemonDetails } from '../services/pokeApi';
 import '../styles/PokemonCard.css';
 
-export const PokemonCard = ({ nombre }) => {
+export const PokemonCard = ({ nombre, onSelect }) => {
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const PokemonCard = ({ nombre }) => {
   if (!pokemon) return <div className="card retro-card loading">...</div>;
 
   return (
-    <button type="button" className="card retro-card" onClick={() => onSelect(url)}>
+    <button type="button" className="card retro-card" onClick={() => onSelect(nombre)}>
       <div className="card-header">
         <span className="pokemon-id">Nº {pokemon.id.toString().padStart(3, '0')}</span>
       </div>

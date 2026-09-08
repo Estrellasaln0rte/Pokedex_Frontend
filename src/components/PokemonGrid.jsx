@@ -9,7 +9,7 @@ export const PokemonGrid = ({ pokemons, onSelect }) => {
   return (
     <div className="pokemon-grid">
       {pokemons.map(nombre => (
-        <PokemonCard key={nombre} nombre={nombre} />
+        <PokemonCard key={nombre} nombre={nombre} onSelect={onSelect} />
       ))}
     </div>
   );

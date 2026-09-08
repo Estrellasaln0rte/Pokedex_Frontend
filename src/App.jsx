@@ -15,7 +15,7 @@ function App() {
   const [typeNamesSet, setTypeNamesSet] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const screenRef = useRef(null);
-  const [selectedUrl, setSelectedUrl] = useState(null);
+  const [selectedNombre, setSelectedNombre] = useState(null);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
@@ -36,6 +36,20 @@ function App() {
 
     return () => { cancelado = true; };
   }, [selectedTypes]);
+
+  useEffect(() => {
+    if (!selectedNombre) {
+      setSelectedPokemon(null);
+      return;
+    }
+
+    let cancelado = false;
+    getPokemonDetails(selectedNombre).then(data => {
+      if (!cancelado) setSelectedPokemon(data);
+    });
+
+    return () => { cancelado = true; };
+  }, [selectedNombre]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -70,10 +84,10 @@ function App() {
     currentPageSafe * PAGE_SIZE
   );
 
-  const isDetailOpen = Boolean(selectedUrl);
-  const selectedIndex = pokemons.findIndex(p => p.url === selectedUrl);
+  const isDetailOpen = Boolean(selectedNombre);
+  const selectedIndex = filteredPokemons.indexOf(selectedNombre);
   const hasPrev = selectedIndex > 0;
-  const hasNext = selectedIndex !== -1 && selectedIndex < pokemons.length - 1;
+  const hasNext = selectedIndex !== -1 && selectedIndex < filteredPokemons.length - 1;
 
   return (
     <main className="pokedex-device">
@@ -90,46 +104,49 @@ function App() {
         {isDetailOpen ? (
           <PokemonDetail
             pokemon={selectedPokemon}
-            onBack={() => setSelectedUrl(null)}
-            onPrev={() => hasPrev && setSelectedUrl(pokemons[selectedIndex - 1].url)}
-            onNext={() => hasNext && setSelectedUrl(pokemons[selectedIndex + 1].url)}
+            onBack={() => setSelectedNombre(null)}
+            onPrev={() => hasPrev && setSelectedNombre(filteredPokemons[selectedIndex - 1])}
+            onNext={() => hasNext && setSelectedNombre(filteredPokemons[selectedIndex + 1])}
             hasPrev={hasPrev}
             hasNext={hasNext}
           />
         ) : (
-      <div className="pokedex-screen-container">
-        <div className="search-row">
-          <SearchBar onSearch={handleSearch} />
-          <TypeFilter
-            selectedTypes={selectedTypes}
-            onToggleType={handleToggleType}
-            onClear={handleClearTypes}
-          />
-        </div>
-        <div className="screen-inner" ref={screenRef}>
-          <PokemonGrid pokemons={visiblePokemons} />
-        </div>
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button
-              className="pagination-btn"
-              onClick={() => goToPage(currentPageSafe - 1)}
-              disabled={currentPageSafe === 1}
-              aria-label="Página anterior"
-            >
-              ◀
-            </button>
-            <span className="pagination-info">
-              Página {currentPageSafe} de {totalPages}
-            </span>
-            <button
-              className="pagination-btn"
-              onClick={() => goToPage(currentPageSafe + 1)}
-              disabled={currentPageSafe === totalPages}
-              aria-label="Página siguiente"
-            >
-              ▶
-            </button>
+          <div className="pokedex-screen-container">
+            <div className="search-row">
+              <SearchBar onSearch={handleSearch} />
+              <TypeFilter
+                selectedTypes={selectedTypes}
+                onToggleType={handleToggleType}
+                onClear={handleClearTypes}
+              />
+            </div>
+            <div className="screen-inner" ref={screenRef}>
+              <PokemonGrid pokemons={visiblePokemons} onSelect={setSelectedNombre} />
+            </div>
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  className="pagination-btn"
+                  onClick={() => goToPage(currentPageSafe - 1)}
+                  disabled={currentPageSafe === 1}
+                  aria-label="Página anterior"
+                >
+                  ◀
+                </button>
+                <span className="pagination-info">
+                  Página {currentPageSafe} de {totalPages}
+                </span>
+                <button
+                  className="pagination-btn"
+                  onClick={() => goToPage(currentPageSafe + 1)}
+                  disabled={currentPageSafe === totalPages}
+                  aria-label="Página siguiente"
+                >
+                  ▶
+                </button>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </main>

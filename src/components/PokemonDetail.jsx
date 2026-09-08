@@ -12,7 +12,7 @@ export const PokemonDetail = ({ pokemon, onBack, onPrev, onNext, hasPrev, hasNex
     );
   }
 
-  const types = pokemon.types.map(t => t.type.name);
+  const types = pokemon.tipos;
 
   return (
     <>
@@ -23,7 +23,7 @@ export const PokemonDetail = ({ pokemon, onBack, onPrev, onNext, hasPrev, hasNex
             <span className="led"></span>
           </div>
           <div className="detail-sprite-frame">
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            <img src={pokemon.imagen} alt={pokemon.nombre} />
           </div>
           <span className="screen-indicator" aria-hidden="true"></span>
           <span className="screen-grille" aria-hidden="true"></span>
@@ -60,7 +60,7 @@ export const PokemonDetail = ({ pokemon, onBack, onPrev, onNext, hasPrev, hasNex
 
       <div className="pokedex-info-panel">
         <div className="info-bezel">
-          <h2 className="info-name">{pokemon.name}</h2>
+          <h2 className="info-name">{pokemon.nombre}</h2>
         </div>
 
         <div className="info-type-grid">
@@ -100,11 +100,11 @@ export const PokemonDetail = ({ pokemon, onBack, onPrev, onNext, hasPrev, hasNex
         <div className="info-readout-row">
           <div className="readout-box">
             <span className="readout-label">Altura</span>
-            <span className="readout-value">{(pokemon.height / 10).toFixed(1)} m</span>
+            <span className="readout-value">{(pokemon.altura / 10).toFixed(1)} m</span>
           </div>
           <div className="readout-box">
             <span className="readout-label">Peso</span>
-            <span className="readout-value">{(pokemon.weight / 10).toFixed(1)} kg</span>
+            <span className="readout-value">{(pokemon.peso / 10).toFixed(1)} kg</span>
           </div>
         </div>
       </div>
