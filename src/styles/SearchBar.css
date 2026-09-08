@@ -5,10 +5,12 @@
   padding: 15px 20px;
   margin-bottom: 20px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 15px;
+  gap: 10px 15px;
   box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
   position: relative;
+  flex-shrink: 0;
 }
 
 /* Doble borde interno clásico de Gameboy */
@@ -35,7 +37,7 @@
   font-family: 'Press Start 2P', cursive;
   font-size: 14px;
   color: #d32f2f;
-  width: 150px;
+  width: min(150px, 100%);
   text-align: center;
   text-transform: uppercase;
   outline: none;
@@ -53,6 +55,13 @@
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
+@media (max-width: 480px) {
+  .dialog-text,
+  .dialog-input {
+    font-size: 11px;
+  }
+}
+
 /* Oculta el texto visualmente pero lo mantiene para lectores de pantalla */
 .visually-hidden {
   position: absolute;

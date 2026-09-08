@@ -1,7 +1,7 @@
 import { PokemonCard } from './PokemonCard';
 import '../styles/PokemonGrid.css';
 
-export const PokemonGrid = ({ pokemons }) => {
+export const PokemonGrid = ({ pokemons, onSelect }) => {
   if (pokemons.length === 0) {
     return <p className="no-results">The Pokémon ran away...</p>;
   }
@@ -9,7 +9,7 @@ export const PokemonGrid = ({ pokemons }) => {
   return (
     <div className="pokemon-grid">
       {pokemons.map(p => (
-        <PokemonCard key={p.name} url={p.url} />
+        <PokemonCard key={p.name} url={p.url} onSelect={onSelect} />
       ))}
     </div>
   );
